@@ -5,7 +5,7 @@ import FlexLayout from "../flexLayout";
 
 function BackgroundImage() {
     return (
-        <ImageBackground source={require('../../assets/images/bgImage.jpg')}
+        <ImageBackground source={require('../../assets/images/bgImage.webp')}
             style={{ height: '100%', width: '100%' }} resizeMode="cover" >
             <FlexLayout />
         </ImageBackground>

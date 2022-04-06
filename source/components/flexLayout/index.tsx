@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Pressable, Text, View } from "react-native";
+import { Alert, Pressable, Text, View } from "react-native";
 import SystemModal from "../modalView";
 
 import { modalStyle, flexStyle } from "../../styles";
@@ -9,48 +9,53 @@ function FlexLayout() {
     let { centeredView, modalView, textStyle, button, modalText } = modalStyle || {};
     let { container, children, row } = flexStyle || {};
 
+    let [randomArray, setRandomArray] = useState<Array<string>>([]);
+
     let handleClick = () => setModalVisible(!modalVisible);
 
     const alpha = Array.from(Array(8)).map((e, i) => String.fromCharCode(i + 65));
+
+    let randomizeArray = () => {
+        let randomIndex;
+        let array = [...alpha, ...alpha];
+        for (let i = (array?.length - 1); i > 1; i--) {
+            randomIndex = Math.floor(Math.random() * i);
+            [array[i], array[randomIndex]] = [array[randomIndex], array[i]];
+        }
+        setRandomArray(array);
+    };
 
     let layoutData = [
         {
             backgroundColor: 'red',
             name: 'EXIT',
             onPress: () => {
-                handleClick()
+                handleClick();
             }
         },
         {
             backgroundColor: 'green',
             name: 'RESTART',
-            onPress: () => {
-                handleClick()
-            }
+            onPress: () => randomizeArray()
         }
     ];
 
+    useEffect(() => {
+        randomizeArray();
+    }, [modalVisible]);
+
     let renderArray = () => (
-        <Pressable onPress={() => { }}>
+        <View style={container}>
             {
-                <View style={container}>
-                    {
-                        alpha?.map((item: string, i: number) => {
-                            return (
-                                <View style={children}><Text style={modalText}>{item}</Text></View>
-                            )
-                        })
-                    }
-                    {
-                        alpha?.map((item: string, i: number) => {
-                            return (
-                                <View style={children}><Text style={modalText}>{item}</Text></View>
-                            )
-                        })
-                    }
-                </View>
+                randomArray?.map((item: string, i: number) => {
+                    return (
+                        <Pressable onPress={() => Alert.alert("Clicked Value is", item)}>
+                            <View style={children}><Text style={modalText}>{item}</Text></View>
+                        </Pressable>
+                    )
+                })
             }
-        </Pressable>
+        </View>
     );
 
     let renderButtons = () => (
