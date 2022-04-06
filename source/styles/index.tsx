@@ -26,7 +26,6 @@ export const modalStyle = StyleSheet.create({
         margin: 64,
         padding: 12,
         elevation: 2,
-        marginVertical: 24,
         borderRadius: 16,
     },
     textStyle: {
@@ -62,7 +61,9 @@ export const flexStyle = StyleSheet.create({
 
     },
     row: {
+        bottom: -150,
+        position: 'absolute',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     }
 });
