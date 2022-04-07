@@ -16,7 +16,7 @@ export const modalStyle = StyleSheet.create({
             width: 0,
             height: 2
         },
-        height: Dimensions.get('screen').height / 1.65,
+        height: '75%',
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
@@ -34,11 +34,12 @@ export const modalStyle = StyleSheet.create({
         textAlign: "center"
     },
     modalText: {
-        paddingVertical: 32,
-        alignContent:'center',
+        paddingVertical: '50%',
+        alignContent: 'center',
         textAlign: "center",
-        fontWeight: '900',
-        fontSize: 24
+        fontWeight: '700',
+        color: '#fff',
+        fontSize: 32
     }
 });
 
@@ -55,14 +56,28 @@ export const flexStyle = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         alignSelf: 'center',
-        borderColor: 'blue',
-        backgroundColor: 'lightblue',
+        borderColor: '#fff',
+        backgroundColor: '#000',
         width: Dimensions.get('screen').width / 4 - 12,
-
     },
     row: {
         bottom: -150,
         position: 'absolute',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    }
+});
+
+export const imageStyle = StyleSheet.create({
+    textStyle: {
+        fontSize: 24,
+        color: "white",
+        fontWeight: "700",
+        textAlign: "center",
+    },
+    row: {
+        flex: 1,
+        margin: 24,
         flexDirection: 'row',
         justifyContent: 'space-between',
     }
