@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Pressable, Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import SystemModal from "../modalView";
 
 import { modalStyle, flexStyle } from "../../styles";
 
-function FlexLayout() {
-    const [modalVisible, setModalVisible] = useState<boolean>(false);
+function FlexLayout(props: any) {
+    let { state, setState } = props || {};
+    let { counter, matches } = state || {};
+
     let { centeredView, modalView, textStyle, button, modalText } = modalStyle || {};
     let { container, children, row } = flexStyle || {};
 
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
     let [randomArray, setRandomArray] = useState<Array<string>>([]);
 
     let handleClick = () => setModalVisible(!modalVisible);
@@ -17,7 +20,7 @@ function FlexLayout() {
 
     let randomizeArray = () => {
         let randomIndex;
-        let array = [...alpha, ...alpha];
+        let array: any = [...alpha, ...alpha];
         for (let i = (array?.length - 1); i > 1; i--) {
             randomIndex = Math.floor(Math.random() * i);
             [array[i], array[randomIndex]] = [array[randomIndex], array[i]];
@@ -31,6 +34,7 @@ function FlexLayout() {
             name: 'EXIT',
             onPress: () => {
                 handleClick();
+                setState({ ...state, counter: 0, matches: 0 });
             }
         },
         {
@@ -47,10 +51,14 @@ function FlexLayout() {
     let renderArray = () => (
         <View style={container}>
             {
-                randomArray?.map((item: string, i: number) => {
+                randomArray?.map((item: any, i: number) => {
                     return (
-                        <Pressable onPress={() => Alert.alert("Clicked Value is", item)}>
-                            <View style={children}><Text style={modalText}>{item}</Text></View>
+                        <Pressable key={i} onPress={() => {
+                            setState({ ...state, counter: counter + 1 });
+                        }}>
+                            <View key={i + 20} style={children}>
+                                <Text style={modalText}>{item}</Text>
+                            </View>
                         </Pressable>
                     )
                 })
@@ -61,12 +69,12 @@ function FlexLayout() {
     let renderButtons = () => (
         <View style={row}>
             {
-                layoutData?.map((item: any, key: number) => {
+                layoutData?.map((item: any, i: number) => {
                     let { backgroundColor, name, onPress } = item || {};
                     return (
                         <>
-                            <Pressable key={key} style={{ ...button, backgroundColor }} onPress={onPress}>
-                                <Text style={textStyle}>{name}</Text>
+                            <Pressable key={i} style={{ ...button, backgroundColor }} onPress={onPress}>
+                                <Text key={i + 10} style={textStyle}>{name}</Text>
                             </Pressable>
                         </>
                     )
