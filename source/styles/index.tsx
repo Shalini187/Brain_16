@@ -50,7 +50,7 @@ export const flexStyle = StyleSheet.create({
         borderRadius: 10,
         flexDirection: 'row',
     },
-    children: {
+    childrenVisible: {
         margin: 4,
         height: 120,
         borderWidth: 1,
@@ -58,6 +58,12 @@ export const flexStyle = StyleSheet.create({
         alignSelf: 'center',
         borderColor: '#fff',
         backgroundColor: '#000',
+        width: Dimensions.get('screen').width / 4 - 12,
+    },
+    childrenInVisible: {
+        margin: 4,
+        height: 120,
+        alignSelf: 'center',
         width: Dimensions.get('screen').width / 4 - 12,
     },
     row: {
