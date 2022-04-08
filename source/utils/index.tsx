@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 export const alpha = Array.from(Array(8)).map((e, i) => String.fromCharCode(i + 65));
 
 export function removeDuplicates(arr: any, key: string, setRandomArray: Function) {
@@ -20,3 +22,9 @@ export function randomizeArray(setRandomArray: Function) {
     });
     setRandomArray(val);
 };
+
+export function falsyArray(arr: any, setVisible: Function) {
+    arr?.map((i: any, k: number) => {
+        if (i) setVisible({ [k]: false });
+    });
+}
