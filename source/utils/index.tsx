@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { createRef } from "react";
 
 export const alpha = Array.from(Array(8)).map((e, i) => String.fromCharCode(i + 65));
 
@@ -28,3 +28,10 @@ export function falsyArray(arr: any, setVisible: Function) {
         if (i) setVisible({ [k]: false });
     });
 }
+
+export function useInstance(arr: Array<any>, setVisible: Function) {
+    arr?.map((i: any, k: number) => {
+        let ref: any = createRef({ [k]: false }) || {};
+        setVisible(ref?.current);
+    })
+};

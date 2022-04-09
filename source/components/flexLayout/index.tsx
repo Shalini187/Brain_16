@@ -1,9 +1,9 @@
-import React, { createRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AppState, Pressable, Text, View } from "react-native";
 import SystemModal from "../modalView";
 
 import { modalStyle, flexStyle } from "../../styles";
-import { falsyArray, randomizeArray, removeDuplicates } from "../../utils";
+import { falsyArray, randomizeArray, removeDuplicates, useInstance } from "../../utils";
 
 function FlexLayout(props: any) {
     let { state, setState } = props || {};
@@ -28,13 +28,7 @@ function FlexLayout(props: any) {
     useEffect(() => {
         let arr = randomArray?.filter((i) => i != undefined);
         if (arr?.length) {
-            const subscription = AppState.addEventListener("change", nextAppState => {
-                randomArray?.map((i: any, k: number) => {
-                    let ref: any = createRef({ [k]: false }) || {};
-                    setVisible(ref?.current);
-                })
-            });
-
+            const subscription = AppState.addEventListener("change", () => useInstance(arr, setVisible));
             return () => {
                 subscription.remove();
             };
